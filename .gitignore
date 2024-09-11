@@ -7,6 +7,8 @@ src/test/java/API/JdbcExample.java
 src/test/java/API/Main.java
 src/test/java/API/PhpMyAdminTest.java
 src/test/java/API/TestDBUtility.java
+logs/
+allure-results/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

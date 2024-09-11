@@ -1,27 +1,34 @@
 package API.tests;
 
-import API.endpoints.registerEndpoint;
 import API.pojo.register;
 import API.utils.DatabaseOperations;
 import io.restassured.RestAssured;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import io.restassured.config.LogConfig;
-import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static API.utils.DatabaseOperations.isEmailPresent;
+import static API.utils.DatabaseOperations.validateDatabase;
+
 public class registerTest {
     register payload;
+    public Logger logger;
 
     @BeforeClass
     public void setup() {
+        logger = LogManager.getLogger(this.getClass());
         RestAssured.config = RestAssured.config().logConfig(LogConfig.logConfig().enableLoggingOfRequestAndResponseIfValidationFails());
     }
 
     @Test(priority = 1)
     public void register() {
+        logger.info("********* Registring User ***********");
+
         payload = new register();
-        payload.setEmail("test23@test.com");
+        payload.setEmail("test26@test.com");
         payload.setLanguage_id(1);
         payload.setPassword("1234");
         payload.setFirstname("Krish");
@@ -33,15 +40,41 @@ public class registerTest {
         payload.setCustomer_group_id(1);
 
         // Check if email already exists
-        if (DatabaseOperations.isEmailPresent(payload.getEmail())) {
+        if (isEmailPresent(payload.getEmail())) {
             System.out.println("Email already exists in the database.");
             Assert.fail("Email already exists in the database.");
         } else {
-            // Insert data into database directly
+            // Insert data into database
             DatabaseOperations.insertIntoDatabase(payload);
 
             // Validate data in the database
-            DatabaseOperations.validateDatabase(payload);
+            validateDatabase(payload);
         }
+        logger.info("********User Created***********");
+
+    }
+
+    @Test(priority = 2)
+    public void updateAndValidateCustomer() {
+        payload = new register();
+        payload.setEmail("test22@test.com");
+        payload.setPassword("newpassword");
+        payload.setFirstname("UpdatedName");
+        payload.setLastname("UpdatedLastname");
+        payload.setTelephone("1231231231");
+
+        DatabaseOperations.updateCustomer(payload);
+
+
+        validateDatabase(payload);
+    }
+
+    @Test(priority = 3)
+    public void deleteAndValidateCustomer() {
+        String email = "test23@test.com";
+
+        DatabaseOperations.deleteCustomer(email);
+
+        Assert.assertFalse(isEmailPresent(email), "Email should not be present in the database");
     }
 }
