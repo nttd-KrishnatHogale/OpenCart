@@ -1,0 +1,1 @@
+{"uuid":"efbff7d4-d53b-4a33-aa18-2b11c56b8097","name":"API.tests.resgisterTest","children":["a0fa8c4a-8a41-494a-84ae-bb6daaac80c6"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1725453332686,"stop":1725453333313}],"afters":[],"start":1725453332605,"stop":1725453335511}
