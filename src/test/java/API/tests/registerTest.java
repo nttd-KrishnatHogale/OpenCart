@@ -56,6 +56,8 @@ public class registerTest {
 
     @Test(priority = 2)
     public void updateAndValidateCustomer() {
+        logger.info("********User Update***********");
+
         payload = new register();
         payload.setEmail("test22@test.com");
         payload.setPassword("newpassword");
@@ -67,14 +69,20 @@ public class registerTest {
 
 
         validateDatabase(payload);
+        logger.info("********User Updated***********");
+
     }
 
     @Test(priority = 3)
     public void deleteAndValidateCustomer() {
+        logger.info("********User Deleting***********");
+
         String email = "test23@test.com";
 
         DatabaseOperations.deleteCustomer(email);
 
         Assert.assertFalse(isEmailPresent(email), "Email should not be present in the database");
+        logger.info("********User Deleted***********");
+
     }
 }
