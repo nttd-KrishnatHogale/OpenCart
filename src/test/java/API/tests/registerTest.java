@@ -28,7 +28,7 @@ public class registerTest {
         logger.info("********* Registring User ***********");
 
         payload = new register();
-        payload.setEmail("test26@test.com");
+        payload.setEmail("test42@test.com");
         payload.setLanguage_id(1);
         payload.setPassword("1234");
         payload.setFirstname("Krish");
@@ -40,15 +40,12 @@ public class registerTest {
         payload.setCustomer_group_id(1);
 
         // Check if email already exists
-        if (isEmailPresent(payload.getEmail())) {
+        if (DatabaseOperations.isEmailPresent(payload.getEmail())) {
             System.out.println("Email already exists in the database.");
             Assert.fail("Email already exists in the database.");
         } else {
-            // Insert data into database
             DatabaseOperations.insertIntoDatabase(payload);
-
-            // Validate data in the database
-            validateDatabase(payload);
+            DatabaseOperations.validateDatabase(payload);
         }
         logger.info("********User Created***********");
 
@@ -59,16 +56,14 @@ public class registerTest {
         logger.info("********User Update***********");
 
         payload = new register();
-        payload.setEmail("test22@test.com");
+        payload.setEmail("test42@test.com");
         payload.setPassword("newpassword");
         payload.setFirstname("UpdatedName");
         payload.setLastname("UpdatedLastname");
         payload.setTelephone("1231231231");
 
         DatabaseOperations.updateCustomer(payload);
-
-
-        validateDatabase(payload);
+        DatabaseOperations.validateDatabase(payload);
         logger.info("********User Updated***********");
 
     }
@@ -77,11 +72,11 @@ public class registerTest {
     public void deleteAndValidateCustomer() {
         logger.info("********User Deleting***********");
 
-        String email = "test23@test.com";
+        String email = "test42@test.com";
 
         DatabaseOperations.deleteCustomer(email);
 
-        Assert.assertFalse(isEmailPresent(email), "Email should not be present in the database");
+        Assert.assertFalse(DatabaseOperations.isEmailPresent(email), "Email should not be present in the database");
         logger.info("********User Deleted***********");
 
     }

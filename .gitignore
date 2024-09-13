@@ -7,6 +7,9 @@ src/test/java/API/JdbcExample.java
 src/test/java/API/Main.java
 src/test/java/API/PhpMyAdminTest.java
 src/test/java/API/TestDBUtility.java
+src/test/resources/deleted_data.json
+src/test/resources/inserted_data.json
+src/test/resources/updated_data.json
 logs/
 allure-results/
 
