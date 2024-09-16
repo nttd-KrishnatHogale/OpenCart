@@ -3,6 +3,7 @@ package API.utils;
 import API.pojo.register;
 
 import java.sql.*;
+import java.util.List;
 
 public class DatabaseOperations {
 
@@ -66,6 +67,8 @@ public class DatabaseOperations {
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 JsonFileUtils.writePayloadToJson(payload, "src/test/resources/inserted_data.json");
+                ExcelFileUtils.writePayloadToExcel(List.of(payload), "src/test/resources/inserted_data.xlsx");
+
             } else {
                 throw new RuntimeException("No rows were inserted into the database");
             }
@@ -130,6 +133,8 @@ public class DatabaseOperations {
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 JsonFileUtils.writePayloadToJson(payload, "src/test/resources/updated_data.json");
+                ExcelFileUtils.writePayloadToExcel(List.of(payload), "src/test/resources/updated_data.xlsx");
+
             } else {
                 throw new RuntimeException("No rows were updated in the database");
             }
@@ -153,7 +158,17 @@ public class DatabaseOperations {
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
+
+//                JsonFileUtils.removeRecordFromJson(email, "src/test/resources/inserted_data.json");
+//                JsonFileUtils.removeRecordFromJson(email,"src/test/resources/updated_data.json");
+                ExcelFileUtils.removeRecordFromExcel(email, "src/test/resources/inserted_data.xlsx");
+                ExcelFileUtils.removeRecordFromExcel(email,"src/test/resources/updated_data.xlsx");
+
+
                 JsonFileUtils.writeDeletionRecordToJson(email, "src/test/resources/deleted_data.json");
+                ExcelFileUtils.writeDeletionRecordToExcel(email, "src/test/resources/deleted_data.xlsx");
+
+
             } else {
                 throw new RuntimeException("No rows were deleted from the database");
             }

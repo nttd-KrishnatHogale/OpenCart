@@ -19,12 +19,10 @@ public class JsonFileUtils {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static void writePayloadToJson(Object payload, String filePath) {
-//        ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
         List<Map<String, Object>> dataList = new ArrayList<>();
 
 
-//        Map<String, Object> existingData = new HashMap<>();
 
         if (file.exists()) {
             try {
