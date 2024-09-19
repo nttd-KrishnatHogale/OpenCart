@@ -28,7 +28,7 @@ public class registerTest {
         logger.info("********* Registring User ***********");
 
         payload = new register();
-        payload.setEmail("test61@test.com");
+        payload.setEmail("test69@test.com");
         payload.setLanguage_id(1);
         payload.setPassword("1234");
         payload.setFirstname("Krish");
@@ -56,7 +56,7 @@ public class registerTest {
         logger.info("********User Update***********");
 
         payload = new register();
-        payload.setEmail("test61@test.com");
+        payload.setEmail("test69@test.com");
         payload.setPassword("newpassword");
         payload.setFirstname("UpdatedName");
         payload.setLastname("UpdatedLastname");
@@ -72,7 +72,7 @@ public class registerTest {
     public void deleteAndValidateCustomer() {
         logger.info("********User Deleting***********");
 
-        String email = "test61@test.com";
+        String email = "test69@test.com";
 
         DatabaseOperations.deleteCustomer(email);
 

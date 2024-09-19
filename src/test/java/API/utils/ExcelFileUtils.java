@@ -40,30 +40,29 @@ public class ExcelFileUtils {
                 createHeaderRow(sheet);
             }
 
-            // Populate data rows
             int rowNum = sheet.getLastRowNum() + 1;
             for (register payload : payloads) {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(payload.getCustomer_group_id());
-                row.createCell(1).setCellValue(0); // Store ID
+                row.createCell(1).setCellValue(0);
                 row.createCell(2).setCellValue(payload.getLanguage_id());
                 row.createCell(3).setCellValue(payload.getFirstname());
                 row.createCell(4).setCellValue(payload.getLastname());
                 row.createCell(5).setCellValue(payload.getEmail());
                 row.createCell(6).setCellValue(payload.getTelephone());
-                row.createCell(7).setCellValue(""); // Fax
+                row.createCell(7).setCellValue("");
                 row.createCell(8).setCellValue(payload.getPassword());
-                row.createCell(9).setCellValue(""); // Salt
-                row.createCell(10).setCellValue(""); // Cart
-                row.createCell(11).setCellValue(""); // Wishlist
+                row.createCell(9).setCellValue("");
+                row.createCell(10).setCellValue("");
+                row.createCell(11).setCellValue("");
                 row.createCell(12).setCellValue(payload.getNewsletter());
-                row.createCell(13).setCellValue(0); // Address ID
-                row.createCell(14).setCellValue(""); // Custom Field
-                row.createCell(15).setCellValue(""); // IP
-                row.createCell(16).setCellValue(1); // Status
-                row.createCell(17).setCellValue(0); // Safe
-                row.createCell(18).setCellValue(""); // Token
-                row.createCell(19).setCellValue(""); // Code
+                row.createCell(13).setCellValue(0);
+                row.createCell(14).setCellValue("");
+                row.createCell(15).setCellValue("");
+                row.createCell(16).setCellValue(1);
+                row.createCell(17).setCellValue(0);
+                row.createCell(18).setCellValue("");
+                row.createCell(19).setCellValue("");
             }
 
             try (FileOutputStream fileOut = new FileOutputStream(new File(filePath))) {
@@ -130,7 +129,7 @@ public class ExcelFileUtils {
                 Cell cell = row.getCell(emailColumnIndex);
                 if (cell != null && cell.getStringCellValue().equals(email)) {
                     sheet.removeRow(row);
-                    break; // Assuming unique emails, break after removing
+                    break;
                 }
             }
 

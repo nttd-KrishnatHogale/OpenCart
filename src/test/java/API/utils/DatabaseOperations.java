@@ -1,9 +1,11 @@
 package API.utils;
+//{"email":"test61@test.com"}
 
 import API.pojo.register;
 
 import java.sql.*;
 import java.util.List;
+import java.util.Map;
 
 public class DatabaseOperations {
 
@@ -158,14 +160,24 @@ public class DatabaseOperations {
 
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
+//                Map<String, Object> recordData = Map.of("email", email);
+//                JsonFileUtils.writeDeletionRecordToJson(recordData, "src/test/resources/deleted_data.json");
+                List<Map<String, Object>> removedFromInserted = JsonFileUtils.removeRecordFromJson(email, "src/test/resources/inserted_data.json");
+                List<Map<String, Object>> removedFromUpdated = JsonFileUtils.removeRecordFromJson(email, "src/test/resources/updated_data.json");
 
-//                JsonFileUtils.removeRecordFromJson(email, "src/test/resources/inserted_data.json");
-//                JsonFileUtils.removeRecordFromJson(email,"src/test/resources/updated_data.json");
+
+
+                JsonFileUtils.removeRecordFromJson(email, "src/test/resources/inserted_data.json");
+                JsonFileUtils.removeRecordFromJson(email,"src/test/resources/updated_data.json");
+
+
                 ExcelFileUtils.removeRecordFromExcel(email, "src/test/resources/inserted_data.xlsx");
                 ExcelFileUtils.removeRecordFromExcel(email,"src/test/resources/updated_data.xlsx");
+                JsonFileUtils.appendRecordsToJson(removedFromInserted, "src/test/resources/deleted_data.json");
+//                JsonFileUtils.appendRecordsToJson(removedFromUpdated, "src/test/resources/deleted_data.json");
 
 
-                JsonFileUtils.writeDeletionRecordToJson(email, "src/test/resources/deleted_data.json");
+//                JsonFileUtils.writeDeletionRecordToJson(email, "src/test/resources/deleted_data.json");
                 ExcelFileUtils.writeDeletionRecordToExcel(email, "src/test/resources/deleted_data.xlsx");
 
 
